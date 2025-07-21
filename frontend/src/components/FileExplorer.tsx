@@ -27,9 +27,11 @@ function FileNode({ item, depth, onFileClick }: FileNodeProps) {
   return (
     <div className="select-none">
       <div
-        className="flex items-center gap-2 p-2 hover:bg-gray-800 rounded-md cursor-pointer"
+        className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer transition-all duration-200 group border border-transparent ${item.type === 'folder' ? 'font-semibold' : ''}`}
         style={{ paddingLeft: `${depth * 1.5}rem` }}
         onClick={handleClick}
+        tabIndex={0}
+        onKeyDown={e => { if (e.key === 'Enter') handleClick(); }}
       >
         {item.type === 'folder' && (
           <span className="text-gray-400">
@@ -41,14 +43,14 @@ function FileNode({ item, depth, onFileClick }: FileNodeProps) {
           </span>
         )}
         {item.type === 'folder' ? (
-          <FolderTree className="w-4 h-4 text-blue-400" />
+          <FolderTree className="w-4 h-4 text-blue-400 group-hover:text-blue-300 transition-colors" />
         ) : (
-          <File className="w-4 h-4 text-gray-400" />
+          <File className="w-4 h-4 text-gray-400 group-hover:text-blue-400 transition-colors" />
         )}
-        <span className="text-gray-200">{item.name}</span>
+        <span className="text-gray-200 group-hover:text-blue-300 transition-colors">{item.name}</span>
       </div>
       {item.type === 'folder' && isExpanded && item.children && (
-        <div>
+        <div className="ml-2 border-l border-gray-800 pl-2 transition-all duration-200">
           {item.children.map((child, index) => (
             <FileNode
               key={`${child.path}-${index}`}
@@ -65,9 +67,9 @@ function FileNode({ item, depth, onFileClick }: FileNodeProps) {
 
 export function FileExplorer({ files, onFileSelect }: FileExplorerProps) {
   return (
-    <div className="bg-gray-900 rounded-lg shadow-lg p-4 h-full overflow-auto">
-      <h2 className="text-lg font-semibold mb-4 flex items-center gap-2 text-gray-100">
-        <FolderTree className="w-5 h-5" />
+    <div className="bg-gray-900/90 rounded-2xl shadow-xl p-5 h-full overflow-auto border border-gray-800 animate-fade-in">
+      <h2 className="text-lg font-bold mb-5 flex items-center gap-2 text-gray-100 tracking-tight">
+        <FolderTree className="w-5 h-5 text-blue-400" />
         File Explorer
       </h2>
       <div className="space-y-1">

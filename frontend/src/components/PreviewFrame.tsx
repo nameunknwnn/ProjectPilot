@@ -9,21 +9,23 @@ interface PreviewFrameProps {
 export function PreviewFrame({ files, webContainer }: PreviewFrameProps) {
   // In a real implementation, this would compile and render the preview
   const [url, setUrl] = useState("");
+ 
 
   async function main() {
     const installProcess = await webContainer.spawn('npm', ['install']);
+    console.log("hiiii")
 
     installProcess.output.pipeTo(new WritableStream({
       write(data) {
-        console.log(data);
+        console.log(data,"adsnajkdnkad");
       }
     }));
 
     await webContainer.spawn('npm', ['run', 'dev']);
+    console.log("blue")
 
-    // Wait for `server-ready` event
     webContainer.on('server-ready', (port, url) => {
-      // ...
+      console.log("1213123")
       console.log(url)
       console.log(port)
       setUrl(url);
