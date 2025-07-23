@@ -193,7 +193,7 @@ export function Builder() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 to-gray-900 flex flex-col">
       <header className="bg-gray-800/90 border-b border-gray-700 px-8 py-5 shadow-lg">
-        <h1 className="text-2xl font-extrabold text-gray-100 tracking-tight drop-shadow-lg">WebBuilder</h1>
+        <h1 className="text-2xl font-extrabold text-gray-100 tracking-tight drop-shadow-lg">Heartly</h1>
         <p className="text-sm text-gray-400 mt-1">Prompt: <span className="font-medium text-blue-300">{prompt}</span></p>
       </header>
       
