@@ -151,7 +151,7 @@ export function Builder() {
   }, [files, webcontainer]);
 
   async function init() {
-    const response = await axios.post(`${process.env.BACKEND_URL}/template`, {
+    const response = await axios.post(`https://bc165da3461a.ngrok-free.app/template`, {
       prompt: prompt.trim()
     });
     setTemplateSet(true);
@@ -164,7 +164,7 @@ export function Builder() {
     })));
 
     setLoading(true);
-    const stepsResponse = await axios.post(`${BACKEND_URL}/chat`, {
+    const stepsResponse = await axios.post(`https://bc165da3461a.ngrok-free.app/chat`, {
       messages: [...prompts, prompt].map(content => ({
         role: "user",
         content
