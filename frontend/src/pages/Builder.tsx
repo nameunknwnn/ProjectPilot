@@ -11,6 +11,7 @@ import { parseXml } from '../steps';
 import { useWebContainer } from '../hooks/useWebContainer';
 // import { FileNode } from '@webcontainer/api';
 import { Loader } from '../components/Loader';
+import { BACKEND_URL } from '../config';
 
 // const MOCK_FILE_CONTENT = `// This is a sample file content
 // import React from 'react';
@@ -150,7 +151,7 @@ export function Builder() {
   }, [files, webcontainer]);
 
   async function init() {
-    const response = await axios.post(`https://bc165da3461a.ngrok-free.app/template`, {
+    const response = await axios.post(`${BACKEND_URL}/template`, {
       prompt: prompt.trim()
     });
     setTemplateSet(true);
@@ -163,7 +164,7 @@ export function Builder() {
     })));
 
     setLoading(true);
-    const stepsResponse = await axios.post(`https://bc165da3461a.ngrok-free.app/chat`, {
+    const stepsResponse = await axios.post(`${BACKEND_URL}/chat`, {
       messages: [...prompts, prompt].map(content => ({
         role: "user",
         content
@@ -192,7 +193,7 @@ export function Builder() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 to-gray-900 flex flex-col">
       <header className="bg-gray-800/90 border-b border-gray-700 px-8 py-5 shadow-lg">
-        <h1 className="text-2xl font-extrabold text-gray-100 tracking-tight drop-shadow-lg">Website Builder</h1>
+        <h1 className="text-2xl font-extrabold text-gray-100 tracking-tight drop-shadow-lg">WebBuilder</h1>
         <p className="text-sm text-gray-400 mt-1">Prompt: <span className="font-medium text-blue-300">{prompt}</span></p>
       </header>
       
@@ -225,7 +226,7 @@ export function Builder() {
                       };
 
                       setLoading(true);
-                      const stepsResponse = await axios.post(`https://bc165da3461a.ngrok-free.app/chat`, {
+                      const stepsResponse = await axios.post(`${BACKEND_URL}/chat`, {
                         messages: [...llmMessages, newMessage]
                       });
                       setLoading(false);

@@ -20,7 +20,7 @@ app.post("/template", async (req, res) => {
             role: 'user', content: prompt
         }],
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 5000,
+        max_tokens: 4000,
         system: "Return either node or react based on what do you think this project should be. Only return a single word either 'node' or 'react'. Do not return anything extra"
     })
 
@@ -51,7 +51,7 @@ app.post("/chat", async (req, res) => {
     const response = await anthropic.messages.create({
         messages: messages,
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 8000,
+        max_tokens: 4000,
         system: getSystemPrompt()
     })
 

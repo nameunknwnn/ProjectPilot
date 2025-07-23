@@ -1,12 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Wand2 } from 'lucide-react';
-import axios from "axios";
-import { BACKEND_URL } from '../config';
+import {  Wand2, Wand2Icon } from 'lucide-react';
 
 export function Home() {
   const [prompt, setPrompt] = useState('');
   const navigate = useNavigate();
+
+  // Typewriter effect for textarea placeholder
+  const placeholderFull = "Describe the website you want to build...";
+  const [placeholder, setPlaceholder] = useState('');
+
+  useEffect(() => {
+    setPlaceholder('');
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i < placeholderFull.length) {
+        setPlaceholder(placeholderFull.substring(0, i + 1));
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 35);
+    
+    return () => clearInterval(interval);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,14 +38,14 @@ export function Home() {
         <div className="text-center mb-10 animate-fade-in">
           <div className="flex justify-center mb-6">
             <span className="inline-flex items-center justify-center rounded-full bg-blue-900/40 p-4 shadow-lg animate-bounce-slow">
-              <Wand2 className="w-14 h-14 text-blue-400 drop-shadow-lg" />
+              <Wand2Icon className="w-14 h-14 text-blue-400 drop-shadow-lg" />
             </span>
           </div>
           <h1 className="text-5xl font-extrabold text-gray-100 mb-3 tracking-tight drop-shadow-lg">
-            Website Builder <span className="text-blue-400">AI</span>
+            Heart<span className="text-blue-400">ly </span>
           </h1>
           <p className="text-xl text-gray-300 font-light max-w-xl mx-auto">
-            Describe your dream website, and we'll help you build it step by step.
+            Making Websites Easy With AI
           </p>
         </div>
 
@@ -37,7 +54,7 @@ export function Home() {
             <textarea
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              placeholder="Describe the website you want to build..."
+              placeholder={placeholder}
               className="w-full h-36 p-4 bg-gray-900/80 text-gray-100 border border-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none placeholder-gray-500 transition-all duration-200 shadow-inner"
               maxLength={400}
             />
@@ -47,7 +64,7 @@ export function Home() {
             >
               <span className="inline-flex items-center gap-2">
                 <Wand2 className="w-5 h-5 animate-sparkle" />
-                Generate Website Plan
+                Generate Website 
               </span>
             </button>
           </div>
