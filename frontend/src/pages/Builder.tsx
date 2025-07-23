@@ -7,7 +7,6 @@ import { CodeEditor } from '../components/CodeEditor';
 import { PreviewFrame } from '../components/PreviewFrame';
 import { Step, FileItem, StepType } from '../types';
 import axios from 'axios';
-import { BACKEND_URL } from '../config';
 import { parseXml } from '../steps';
 import { useWebContainer } from '../hooks/useWebContainer';
 // import { FileNode } from '@webcontainer/api';
@@ -226,7 +225,7 @@ export function Builder() {
                       };
 
                       setLoading(true);
-                      const stepsResponse = await axios.post(`${BACKEND_URL}/chat`, {
+                      const stepsResponse = await axios.post(`https://bc165da3461a.ngrok-free.app/chat`, {
                         messages: [...llmMessages, newMessage]
                       });
                       setLoading(false);
