@@ -151,7 +151,7 @@ export function Builder() {
   }, [files, webcontainer]);
 
   async function init() {
-    const response = await axios.post(`${BACKEND_URL}/template`, {
+    const response = await axios.post(`${process.env.BACKEND_URL}/template`, {
       prompt: prompt.trim()
     });
     setTemplateSet(true);
